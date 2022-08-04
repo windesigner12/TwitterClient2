@@ -4,11 +4,11 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/ivProfileImage"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="wrap_content">
 
 
     <ImageView
-        android:id="@+id/imageView"
+        android:id="@+id/ivProfileImage"
         android:layout_width="50dp"
         android:layout_height="50dp"
         tools:srcCompat="@tools:sample/avatars" />
@@ -18,7 +18,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="5dp"
-        android:layout_toEndOf="@+id/imageView"
+        android:layout_toEndOf="@+id/ivProfileImage"
         tools:text="Sample Texte" />
 
     <TextView
@@ -28,6 +28,6 @@
         android:layout_below="@+id/tvScreenName"
         android:layout_marginStart="5dp"
         android:layout_marginTop="2dp"
-        android:layout_toEndOf="@+id/imageView"
-        android:text="TextView" />
+        android:layout_toEndOf="@+id/ivProfileImage"
+        tools:text="This is the tweets made by the person in the application " />
 </RelativeLayout>

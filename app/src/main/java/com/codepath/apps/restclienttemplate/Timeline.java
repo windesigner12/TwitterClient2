@@ -11,12 +11,22 @@ import okhttp3.Headers;
 
 public class Timeline extends AppCompatActivity {
 
+    RestClient client;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_timeline);
 
-        RestClient client = RestApplication.getRestClient(this);
+        client = RestApplication.getRestClient(this);
+
+        populateHomeTimeline();
+
+
+    }
+
+    public void populateHomeTimeline(){
+
         client.getTimelineTweets(new JsonHttpResponseHandler() {
             @Override
             public void onSuccess(int statusCode, Headers headers, JSON json) {
