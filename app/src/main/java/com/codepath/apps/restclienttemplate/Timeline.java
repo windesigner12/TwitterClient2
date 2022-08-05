@@ -7,6 +7,7 @@ import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 
 import android.os.Bundle;
 import android.util.Log;
+import android.widget.LinearLayout;
 
 import com.codepath.apps.restclienttemplate.models.Tweet;
 import com.codepath.asynchttpclient.callback.JsonHttpResponseHandler;
@@ -26,6 +27,7 @@ public class Timeline extends AppCompatActivity {
     List<Tweet> tweets;
     TweetAdapter adapter;
     SwipeRefreshLayout swipeContainer;
+    EndlessRecyclerViewScrollListener scrollListener;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -33,6 +35,7 @@ public class Timeline extends AppCompatActivity {
         setContentView(R.layout.activity_timeline);
 
         client = RestApplication.getRestClient(this);
+
 
         rvTweets = findViewById(R.id.rvTweets);
         swipeContainer = findViewById(R.id.swipeContainer);
@@ -53,11 +56,47 @@ public class Timeline extends AppCompatActivity {
 
         tweets = new ArrayList<>();
         adapter = new TweetAdapter(this, tweets);
-        rvTweets.setLayoutManager(new LinearLayoutManager(this));
+        LinearLayoutManager layoutManager = new LinearLayoutManager(this);
+        rvTweets.setLayoutManager(layoutManager);
         rvTweets.setAdapter(adapter);
+
+        scrollListener = new EndlessRecyclerViewScrollListener(layoutManager) {
+            @Override
+            public void onLoadMore(int page, int totalItemsCount, RecyclerView view) {
+                Log.i("TimelineActivity", "Load More Data");
+                loadMoreData();
+            }
+
+        };
+
+        // Adds the scroll listener to RecyclerView
+        rvTweets.addOnScrollListener(scrollListener);
 
         populateHomeTimeline();
 
+    }
+
+    private void loadMoreData(){
+        client.getNextPageOfTweets(new JsonHttpResponseHandler() {
+            @Override
+            public void onSuccess(int statusCode, Headers headers, JSON json) {
+                Log.i("TimelineActivity", "On Success for Load More Data 2" );
+
+                JSONArray jsonArray =json.jsonArray;
+                try {
+                   List<Tweet> tweets = Tweet.fromJsonArray(jsonArray);
+                   adapter.addAll(tweets);
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
+            }
+
+            @Override
+            public void onFailure(int statusCode, Headers headers, String response, Throwable throwable) {
+                Log.e("TimelineActivity", "On Failure for Load More Data" + throwable);
+
+            }
+        }, tweets.get(tweets.size() -1).id );
 
     }
 
