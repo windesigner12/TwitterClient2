@@ -25,12 +25,21 @@ public class SampleModel {
 	@ColumnInfo
 	private String name;
 
+	@ColumnInfo
+	public String body;
+
+	@ColumnInfo
+	public String createdAt;
+
+
+	//public User user;
+
 	public SampleModel() {
 		super();
 	}
 
 	// Parse model from JSON
-	public SampleModel(JSONObject object){
+	public SampleModel(JSONObject object) throws JSONException {
 		super();
 
 		try {
@@ -38,9 +47,17 @@ public class SampleModel {
 		} catch (JSONException e) {
 			e.printStackTrace();
 		}
+
+
+		this.body = object.getString("text"); ;
+
+
+		this.createdAt = object.getString("created_at");
+
+		//this.user = User.fromJson(object.getJSONObject("user"));
 	}
 
-	// Getters
+	 //Getters
 	public String getName() {
 		return name;
 	}
@@ -54,4 +71,28 @@ public class SampleModel {
 		this.name = name;
 	}
 
+
+	public String getBody() {
+		return body;
+	}
+
+	public void setBody(String body) {
+		this.body = body;
+	}
+
+	public String getCreatedAt() {
+		return createdAt;
+	}
+
+	public void setCreatedAt(String createdAt) {
+		this.createdAt = createdAt;
+	}
+
+//	public User getUser() {
+//		return user;
+//	}
+//
+//	public void setUser(User user) {
+//		this.user = user;
+//	}
 }

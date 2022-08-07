@@ -1,14 +1,18 @@
 package com.codepath.apps.restclienttemplate;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.recyclerview.widget.DividerItemDecoration;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.util.Log;
 import android.widget.LinearLayout;
 
+import com.codepath.apps.restclienttemplate.models.SampleModel;
+import com.codepath.apps.restclienttemplate.models.SampleModelDao;
 import com.codepath.apps.restclienttemplate.models.Tweet;
 import com.codepath.asynchttpclient.callback.JsonHttpResponseHandler;
 
@@ -33,6 +37,19 @@ public class Timeline extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_timeline);
+
+        SampleModelDao sampleModelDao = ((RestApplication) getApplicationContext()).getMyDatabase().sampleModelDao();
+
+
+
+
+        AsyncTask.execute(new Runnable() {
+            @Override
+            public void run() {
+                List<SampleModel> listItems = sampleModelDao.recentItems();
+                Log.d("DB",listItems.toString());
+            }
+        });
 
         client = RestApplication.getRestClient(this);
 
@@ -59,6 +76,8 @@ public class Timeline extends AppCompatActivity {
         LinearLayoutManager layoutManager = new LinearLayoutManager(this);
         rvTweets.setLayoutManager(layoutManager);
         rvTweets.setAdapter(adapter);
+
+        rvTweets.addItemDecoration(new DividerItemDecoration(this, LinearLayoutManager.VERTICAL));
 
         scrollListener = new EndlessRecyclerViewScrollListener(layoutManager) {
             @Override
@@ -105,7 +124,7 @@ public class Timeline extends AppCompatActivity {
         client.getTimelineTweets(new JsonHttpResponseHandler() {
             @Override
             public void onSuccess(int statusCode, Headers headers, JSON json) {
-                Log.d("OK","OnSuccess"+ json.toString() );
+                Log.d("LoadOfData","OnSuccess"+ json.toString() );
 
                 JSONArray jsonArray = json.jsonArray;
                 try {
@@ -120,7 +139,7 @@ public class Timeline extends AppCompatActivity {
 
             @Override
             public void onFailure(int statusCode, Headers headers, String response, Throwable throwable) {
-                Log.d("OK","OnFaillure"+response.toString());
+                Log.d("OK","OnFaillure"+ response.toString());
             }
         });
     }

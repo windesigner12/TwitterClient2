@@ -9,6 +9,8 @@ import android.view.View;
 
 import com.codepath.apps.restclienttemplate.models.SampleModel;
 import com.codepath.apps.restclienttemplate.models.SampleModelDao;
+import com.codepath.apps.restclienttemplate.models.Tweet;
+import com.codepath.apps.restclienttemplate.models.User;
 import com.codepath.oauth.OAuthLoginActionBarActivity;
 
 public class LoginActivity extends OAuthLoginActionBarActivity<RestClient> {
@@ -22,13 +24,20 @@ public class LoginActivity extends OAuthLoginActionBarActivity<RestClient> {
 
 		final SampleModel sampleModel = new SampleModel();
 		sampleModel.setName("CodePath");
+		sampleModel.setCreatedAt("2020-10-14");
+		sampleModel.setBody("Hello Wprld");
+		sampleModel.setId(12555565l);
+
+
 
 		sampleModelDao = ((RestApplication) getApplicationContext()).getMyDatabase().sampleModelDao();
+
 
 		AsyncTask.execute(new Runnable() {
 			@Override
 			public void run() {
 				sampleModelDao.insertModel(sampleModel);
+
 			}
 		});
 	}
@@ -45,7 +54,7 @@ public class LoginActivity extends OAuthLoginActionBarActivity<RestClient> {
 	// i.e Display application "homepage"
 	@Override
 	public void onLoginSuccess() {
-		//Log.d("LOGACTIVITY", "OnSuccess");
+		Log.d("LOGACTIVITY", "OnSuccess");
 		Intent i = new Intent(this, Timeline.class);
 		startActivity(i);
 
@@ -63,6 +72,7 @@ public class LoginActivity extends OAuthLoginActionBarActivity<RestClient> {
 	// This should be tied to a button used to login
 	public void loginToRest(View view) {
 		getClient().connect();
+		Log.d("LOGACTIVITY", "OnSuccess");
 
 	}
 

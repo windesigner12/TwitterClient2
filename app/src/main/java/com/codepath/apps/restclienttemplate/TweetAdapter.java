@@ -1,17 +1,26 @@
 package com.codepath.apps.restclienttemplate;
 
+import android.app.Activity;
 import android.content.Context;
+import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
+import androidx.core.app.ActivityOptionsCompat;
+import androidx.core.util.Pair;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
+import com.bumptech.glide.load.resource.bitmap.CenterCrop;
+import com.bumptech.glide.load.resource.bitmap.RoundedCorners;
 import com.codepath.apps.restclienttemplate.models.Tweet;
+
+import org.parceler.Parcels;
 
 import java.util.List;
 
@@ -62,7 +71,8 @@ public class TweetAdapter extends RecyclerView.Adapter<TweetAdapter.ViewHolder>{
         TextView tvBody;
         TextView tvScreenName;
         TextView tvHours;
-        TextView tvname;
+        TextView tvName;
+        RelativeLayout container;
 
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
@@ -71,16 +81,52 @@ public class TweetAdapter extends RecyclerView.Adapter<TweetAdapter.ViewHolder>{
             tvBody = itemView.findViewById(R.id.tvBody);
             tvScreenName = itemView.findViewById(R.id.tvScreenName);
             tvHours = itemView.findViewById(R.id.tvhours);
-            tvname = itemView.findViewById(R.id.tvName);
+            tvName = itemView.findViewById(R.id.tvName);
+            container = itemView.findViewById(R.id.container);
 
         }
 
         public void bind(Tweet tweet) {
             tvBody.setText(tweet.body);
             tvScreenName.setText(tweet.user.screenName);
-            Glide.with(context).load(tweet.user.profileImageUrl).into(ivProfileImage);
+            Glide.with(context).load(tweet.user.profileImageUrl) .transform(new CenterCrop(),new RoundedCorners(70)).into(ivProfileImage);
             tvHours.setText(TimeFormatter.getTimeDifference(tweet.createdAt));
-            tvname.setText("@"+tweet.user.name);
+            tvName.setText("@"+tweet.user.name);
+
+
+//            container.setOnClickListener(new View.OnClickListener() {
+//                @Override
+//                public void onClick(View view) {
+//                    Intent i = new Intent(context, Tweet_details.class);
+//                    i.putExtra("tweet", Parcels.wrap(tweet));
+//
+//                    Pair<View, String> trans1 = Pair.create(tvBody , "body");
+//                    Pair<View, String> trans2 = Pair.create(tvName , "name");
+//                    Pair<View, String> trans3 = Pair.create(tvScreenName , "screenname");
+//
+//                    ActivityOptionsCompat options = ActivityOptionsCompat.makeSceneTransitionAnimation((Activity) context, trans1,trans2,trans3);
+//                    context.startActivity(i, options.toBundle());
+//
+//                }
+//            });
+
+
+            container.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    Intent i = new Intent(context, Tweet_details.class);
+                    i.putExtra("tweet", Parcels.wrap(tweet));
+
+                    Pair<View, String> trans1 = Pair.create(tvBody , "body");
+                    Pair<View, String> trans2 = Pair.create(tvName , "name");
+                    Pair<View, String> trans3 = Pair.create(tvScreenName , "screenname");
+
+                    ActivityOptionsCompat options = ActivityOptionsCompat.makeSceneTransitionAnimation((Activity) context, trans1,trans2,trans3);
+                    context.startActivity(i, options.toBundle());
+
+                }
+            });
+
 
         }
     }
