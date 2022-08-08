@@ -3,12 +3,15 @@ package com.codepath.apps.restclienttemplate;
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.core.app.ActivityOptionsCompat;
@@ -73,6 +76,14 @@ public class TweetAdapter extends RecyclerView.Adapter<TweetAdapter.ViewHolder>{
         TextView tvHours;
         TextView tvName;
         RelativeLayout container;
+        ImageView tvUrl;
+
+        //////Action Button
+        TextView tvChat;
+        TextView tvUndo;
+        TextView tvRepeat;
+        TextView tvHeart;
+
 
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
@@ -83,32 +94,32 @@ public class TweetAdapter extends RecyclerView.Adapter<TweetAdapter.ViewHolder>{
             tvHours = itemView.findViewById(R.id.tvhours);
             tvName = itemView.findViewById(R.id.tvName);
             container = itemView.findViewById(R.id.container);
+            //tvUrl = itemView.findViewById(R.id.tvUrl);
+                ////Action BUtton
+
+            tvUndo = itemView.findViewById(R.id.tvUndo);
+            tvRepeat = itemView.findViewById(R.id.tvRepeat);
+            tvHeart = itemView.findViewById(R.id.tvHeart);
+            tvChat = itemView.findViewById(R.id.tvChat);
+
 
         }
 
         public void bind(Tweet tweet) {
-            tvBody.setText(tweet.body);
-            tvScreenName.setText(tweet.user.screenName);
             Glide.with(context).load(tweet.user.profileImageUrl) .transform(new CenterCrop(),new RoundedCorners(70)).into(ivProfileImage);
-            tvHours.setText(TimeFormatter.getTimeDifference(tweet.createdAt));
+            tvScreenName.setText(tweet.user.screenName);
             tvName.setText("@"+tweet.user.name);
+            tvBody.setText(tweet.body);
+            tvHours.setText(TimeFormatter.getTimeDifference(tweet.createdAt));
+            tvRepeat.setText(tweet.retweet_count);
+            tvHeart.setText(tweet.favorite_count);
+           // Glide.with(context).load(tweet.url).transform(new CenterCrop(),new RoundedCorners(25)).into(tvUrl);
 
 
-//            container.setOnClickListener(new View.OnClickListener() {
-//                @Override
-//                public void onClick(View view) {
-//                    Intent i = new Intent(context, Tweet_details.class);
-//                    i.putExtra("tweet", Parcels.wrap(tweet));
-//
-//                    Pair<View, String> trans1 = Pair.create(tvBody , "body");
-//                    Pair<View, String> trans2 = Pair.create(tvName , "name");
-//                    Pair<View, String> trans3 = Pair.create(tvScreenName , "screenname");
-//
-//                    ActivityOptionsCompat options = ActivityOptionsCompat.makeSceneTransitionAnimation((Activity) context, trans1,trans2,trans3);
-//                    context.startActivity(i, options.toBundle());
-//
-//                }
-//            });
+
+
+
+
 
 
             container.setOnClickListener(new View.OnClickListener() {
@@ -128,7 +139,41 @@ public class TweetAdapter extends RecyclerView.Adapter<TweetAdapter.ViewHolder>{
             });
 
 
-        }
+            tvUndo.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Log.d("Button", "Comment BUTTON");
+                Toast.makeText(context , "You Press the Undo Button", Toast.LENGTH_SHORT).show();
+            }
+        });
+
+        tvRepeat.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Toast.makeText(context, "You Press the Repeat Button", Toast.LENGTH_SHORT).show();
+                Log.d("Button", "Repeat BUTTON");
+            }
+        });
+
+        tvChat.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Toast.makeText(context, "You Press the Chat Button", Toast.LENGTH_SHORT).show();
+                Log.d("Button", "Chat BUTTON");
+            }
+        });
+
+        tvHeart.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Toast.makeText(context, "You Press the Heart Button", Toast.LENGTH_SHORT).show();
+                Log.d("Button", "Like BUTTON");
+            }
+        });
+
+
+
+            }
     }
 
 

@@ -127,6 +127,7 @@ public class Timeline extends AppCompatActivity {
                 Log.d("LoadOfData","OnSuccess"+ json.toString() );
 
                 JSONArray jsonArray = json.jsonArray;
+
                 try {
                     adapter.clear();
                     adapter.addAll(Tweet.fromJsonArray(jsonArray));

@@ -4,7 +4,9 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".Tweet_details">
+    tools:context=".Tweet_details"
+    android:layout_marginLeft="10dp"
+    android:layout_marginRight="10dp">
 
     <ImageView
         android:id="@+id/ivProfileImage"
@@ -34,9 +36,9 @@
         android:layout_marginTop="4dp"
         android:layout_toEndOf="@+id/ivProfileImage"
         android:text="TextView"
+        android:transitionName="name"
         app:layout_constraintStart_toEndOf="@+id/ivProfileImage"
-        app:layout_constraintTop_toBottomOf="@+id/tvScreenName"
-        android:transitionName="name"/>
+        app:layout_constraintTop_toBottomOf="@+id/tvScreenName" />
 
     <TextView
         android:id="@+id/tvBody"
@@ -44,8 +46,125 @@
         android:layout_height="wrap_content"
         android:layout_below="@+id/ivProfileImage"
         android:layout_marginTop="12dp"
+        android:textSize="24sp"
+        android:transitionName="body"
         app:layout_constraintTop_toBottomOf="@+id/ivProfileImage"
         tools:layout_editor_absoluteX="0dp"
-        tools:text="This is the Body of the Application "
-        android:transitionName="body"/>
+        tools:text="This is the Body of the Application " />
+
+
+    <ImageView
+        android:id="@+id/tvUrl"
+        android:layout_width="392dp"
+        android:layout_height="221dp"
+        android:layout_below="@+id/tvBody"
+        android:layout_marginStart="-1dp"
+        android:layout_marginTop="5dp"
+        tools:srcCompat="@tools:sample/avatars" />
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="40dp"
+        android:layout_below="@+id/tvUrl"
+        android:layout_alignParentEnd="true"
+        android:layout_marginStart="3dp"
+        android:layout_marginTop="12dp"
+        android:layout_marginEnd="-2dp"
+        android:layout_marginBottom="5dp"
+        android:orientation="horizontal">
+
+        <Space
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="2" />
+        <!--        <Button-->
+        <!--            android:id="@+id/tvChat"-->
+        <!--            android:layout_width="wrap_content"-->
+        <!--            android:layout_height="wrap_content"-->
+        <!--            android:background="#00FFFFFF"-->
+        <!--            android:backgroundTint="#00FFFFFF"-->
+        <!--            android:drawableTop="@drawable/ic_chat_outline"/>-->
+        <TextView
+            android:id="@+id/tvChat"
+            android:layout_width="50dp"
+            android:layout_height="match_parent"
+            android:clickable="true"
+            android:drawableStart="@drawable/ic_chat_outline" />
+
+
+        <Space
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1" />
+
+
+        <!--        <Button-->
+        <!--            android:id="@+id/tvRepeat"-->
+        <!--            android:layout_width="wrap_content"-->
+        <!--            android:layout_height="wrap_content"-->
+        <!--            android:background="#00FFFFFF"-->
+        <!--            android:backgroundTint="#00FFFFFF"-->
+        <!--            android:drawableTop="@drawable/ic_repeat_variant" />-->
+
+        <TextView
+            android:id="@+id/tvRepeat"
+            android:layout_width="50dp"
+            android:layout_height="match_parent"
+            android:drawableStart="@drawable/ic_repeat_variant" />
+
+
+        <Space
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1" />
+
+
+        <!--        <Button-->
+        <!--            android:id="@+id/tvHeart"-->
+        <!--            android:layout_width="wrap_content"-->
+        <!--            android:layout_height="wrap_content"-->
+        <!--            android:background="#00FFFFFF"-->
+        <!--            android:backgroundTint="#00FFFFFF"-->
+        <!--            android:drawableTop="@drawable/ic_cards_heart_outline" />-->
+        <TextView
+            android:id="@+id/tvHeart"
+            android:layout_width="50dp"
+            android:layout_height="match_parent"
+            android:drawableStart="@drawable/ic_cards_heart_outline" />
+
+
+        <Space
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1" />
+
+
+        <!--        <Button-->
+        <!--            android:id="@+id/tvUndo"-->
+        <!--            android:layout_width="wrap_content"-->
+        <!--            android:layout_height="wrap_content"-->
+        <!--            android:background="#00FFFFFF"-->
+        <!--            android:backgroundTint="#00FFFFFF"-->
+        <!--            android:drawableTop="@drawable/ic_share_variant_outline"-->
+        <!--            tools:ignore="SpeakableTextPresentCheck,SpeakableTextPresentCheck" />-->
+
+        <TextView
+            android:id="@+id/tvUndo"
+            android:layout_width="50dp"
+            android:layout_height="match_parent"
+            android:drawableStart="@drawable/ic_share_variant_outline" />
+
+        <Space
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1" />
+
+        <!--        <com.google.android.material.floatingactionbutton.FloatingActionButton-->
+        <!--            android:layout_width="wrap_content"-->
+        <!--            android:layout_height="wrap_content"-->
+        <!--            android:clickable="true"-->
+        <!--            app:layout_anchorGravity="bottom|right|end"-->
+        <!--            android:src="@drawable/ic_undo" />-->
+    </LinearLayout>
 </RelativeLayout>

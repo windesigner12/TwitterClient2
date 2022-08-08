@@ -5,7 +5,8 @@
     android:id="@+id/container"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:layout_margin="5dp">
+    android:layout_margin="5dp"
+    android:background="#FFFFFF">
 
 
     <ImageView
@@ -57,7 +58,122 @@
         android:layout_toEndOf="@+id/ivProfileImage"
         android:autoLink="all"
         android:linksClickable="true"
-
         tools:text="This is the tweets made by the person in the application " />
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/tvUrl"
+        android:layout_alignParentEnd="true"
+        android:layout_marginStart="3dp"
+        android:layout_marginTop="12dp"
+        android:layout_marginBottom="5dp"
+        android:layout_marginEnd="-2dp"
+        android:layout_toEndOf="@+id/ivProfileImage"
+        android:orientation="horizontal">
+
+        <Space
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1" />
+        <!--        <Button-->
+        <!--            android:id="@+id/tvChat"-->
+        <!--            android:layout_width="wrap_content"-->
+        <!--            android:layout_height="wrap_content"-->
+        <!--            android:background="#00FFFFFF"-->
+        <!--            android:backgroundTint="#00FFFFFF"-->
+        <!--            android:drawableTop="@drawable/ic_chat_outline"/>-->
+        <TextView
+            android:id="@+id/tvChat"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:clickable="true"
+            android:drawableStart="@drawable/ic_chat_outline" />
+
+
+        <Space
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1" />
+
+
+        <!--        <Button-->
+        <!--            android:id="@+id/tvRepeat"-->
+        <!--            android:layout_width="wrap_content"-->
+        <!--            android:layout_height="wrap_content"-->
+        <!--            android:background="#00FFFFFF"-->
+        <!--            android:backgroundTint="#00FFFFFF"-->
+        <!--            android:drawableTop="@drawable/ic_repeat_variant" />-->
+
+        <TextView
+            android:id="@+id/tvRepeat"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:drawableStart="@drawable/ic_repeat_variant" />
+
+
+        <Space
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1" />
+
+
+        <!--        <Button-->
+        <!--            android:id="@+id/tvHeart"-->
+        <!--            android:layout_width="wrap_content"-->
+        <!--            android:layout_height="wrap_content"-->
+        <!--            android:background="#00FFFFFF"-->
+        <!--            android:backgroundTint="#00FFFFFF"-->
+        <!--            android:drawableTop="@drawable/ic_cards_heart_outline" />-->
+        <TextView
+            android:id="@+id/tvHeart"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:drawableStart="@drawable/ic_cards_heart_outline" />
+
+
+        <Space
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1" />
+
+
+        <!--        <Button-->
+        <!--            android:id="@+id/tvUndo"-->
+        <!--            android:layout_width="wrap_content"-->
+        <!--            android:layout_height="wrap_content"-->
+        <!--            android:background="#00FFFFFF"-->
+        <!--            android:backgroundTint="#00FFFFFF"-->
+        <!--            android:drawableTop="@drawable/ic_share_variant_outline"-->
+        <!--            tools:ignore="SpeakableTextPresentCheck,SpeakableTextPresentCheck" />-->
+
+        <TextView
+            android:id="@+id/tvUndo"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:drawableStart="@drawable/ic_share_variant_outline" />
+
+        <Space
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="2" />
+
+        <!--        <com.google.android.material.floatingactionbutton.FloatingActionButton-->
+        <!--            android:layout_width="wrap_content"-->
+        <!--            android:layout_height="wrap_content"-->
+        <!--            android:clickable="true"-->
+        <!--            app:layout_anchorGravity="bottom|right|end"-->
+        <!--            android:src="@drawable/ic_undo" />-->
+    </LinearLayout>
+
+    <ImageView
+        android:id="@+id/tvUrl"
+        android:layout_width="353dp"
+        android:layout_height="189dp"
+        android:layout_below="@+id/tvBody"
+        android:layout_marginStart="-1dp"
+        android:layout_marginTop="5dp"
+        android:layout_toEndOf="@+id/ivProfileImage"
+        tools:srcCompat="@tools:sample/avatars" />
 
 </RelativeLayout>

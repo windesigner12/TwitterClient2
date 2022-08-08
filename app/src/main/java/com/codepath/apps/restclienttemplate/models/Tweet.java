@@ -19,6 +19,9 @@ public class Tweet {
     public String createdAt;
     public User user;
     public long id;
+    public String retweet_count;
+    public String favorite_count;
+    //public String url;
 
     public Tweet(){
 
@@ -31,6 +34,12 @@ public class Tweet {
         tweet.createdAt = jsonObject.getString("created_at");
         tweet.user = User.fromJson(jsonObject.getJSONObject("user"));
         tweet.id = jsonObject.getLong("id");
+        tweet.retweet_count = jsonObject.getString("retweet_count");
+        tweet.favorite_count = jsonObject.getString("favorite_count");
+        //tweet.url = jsonObject.getJSONObject("extended_entities ").getString("media_url");
+
+
+        //String youtubeKey = results.getJSONObject(0).getString("key");
 
         return tweet;
     }

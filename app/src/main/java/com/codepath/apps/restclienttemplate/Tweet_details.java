@@ -3,8 +3,12 @@ package com.codepath.apps.restclienttemplate;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.os.Bundle;
+import android.util.Log;
+import android.view.View;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.load.resource.bitmap.CenterCrop;
@@ -22,6 +26,7 @@ public class Tweet_details extends AppCompatActivity {
     TextView tvName;
     ImageView ivProfileImage;
 
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -37,9 +42,8 @@ public class Tweet_details extends AppCompatActivity {
 
         tvBody.setText(tweet.body);
         tvScreenName.setText(tweet.user.screenName);
-        tvName.setText(tweet.user.name);
-        Glide.with(this).load(tweet.user.profileImageUrl) .transform(new CenterCrop(),new RoundedCorners(15)).into(ivProfileImage);
-
+        tvName.setText("@"+tweet.user.name);
+        Glide.with(this).load(tweet.user.profileImageUrl) .transform(new CenterCrop(),new RoundedCorners(100)).into(ivProfileImage);
 
 
 
