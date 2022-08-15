@@ -2,6 +2,8 @@ package com.codepath.apps.restclienttemplate.models;
 
 import androidx.room.ColumnInfo;
 import androidx.room.Entity;
+import androidx.room.ForeignKey;
+import androidx.room.Ignore;
 import androidx.room.PrimaryKey;
 
 import org.json.JSONArray;
@@ -13,13 +15,31 @@ import java.util.ArrayList;
 import java.util.List;
 
 @Parcel
+@Entity(foreignKeys = @ForeignKey(entity = User.class, parentColumns = "id",childColumns = "userId"))
 public class Tweet {
 
-    public String body;
-    public String createdAt;
-    public User user;
+
+    @PrimaryKey
+    @ColumnInfo
     public long id;
+
+    @ColumnInfo
+    public String body;
+
+    @ColumnInfo
+    public String createdAt;
+
+    @Ignore
+    public User user;
+
+    @ColumnInfo
+    public long userId;
+
+
+    @ColumnInfo
     public String retweet_count;
+
+    @ColumnInfo
     public String favorite_count;
     //public String ivUrl;
 
@@ -36,10 +56,25 @@ public class Tweet {
         tweet.id = jsonObject.getLong("id");
         tweet.retweet_count = jsonObject.getString("retweet_count");
         tweet.favorite_count = jsonObject.getString("favorite_count");
-       //git  tweet.ivUrl = jsonObject.getJSONObject("entities ").getString("media_url");
+        User user = User.fromJson(jsonObject.getJSONObject("user"));
+        tweet.user = user;
+        tweet.userId = user.id;
 
+        try {
+            JSONArray entities_media = jsonObject.getJSONObject("extended_entities").getJSONArray("media");
 
-        //String youtubeKey = results.getJSONObject(0).getString("key");
+            for(int i = 0; i < entities_media.length(); i++ ){
+                String P = "";
+                P += entities_media.getJSONObject(i).getString("media_url_https");
+                P += " - ";
+                P += entities_media.getJSONObject(0).getString("type");
+               // tweet.medias.add(P);
+
+            }
+        }catch(Exception e ){
+            return tweet;
+        }
+
 
         return tweet;
     }

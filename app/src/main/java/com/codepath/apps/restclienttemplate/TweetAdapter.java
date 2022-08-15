@@ -20,11 +20,13 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.load.resource.bitmap.CenterCrop;
+import com.bumptech.glide.load.resource.bitmap.FitCenter;
 import com.bumptech.glide.load.resource.bitmap.RoundedCorners;
 import com.codepath.apps.restclienttemplate.models.Tweet;
 
 import org.parceler.Parcels;
 
+import java.util.Arrays;
 import java.util.List;
 
 public class TweetAdapter extends RecyclerView.Adapter<TweetAdapter.ViewHolder>{
@@ -94,7 +96,7 @@ public class TweetAdapter extends RecyclerView.Adapter<TweetAdapter.ViewHolder>{
             tvHours = itemView.findViewById(R.id.tvhours);
             tvName = itemView.findViewById(R.id.tvName);
             container = itemView.findViewById(R.id.container);
-            //tvUrl = itemView.findViewById(R.id.tvUrl);
+            tvUrl = itemView.findViewById(R.id.tvUrl);
                 ////Action BUtton
 
             tvUndo = itemView.findViewById(R.id.tvUndo);
@@ -115,8 +117,21 @@ public class TweetAdapter extends RecyclerView.Adapter<TweetAdapter.ViewHolder>{
             tvHeart.setText(tweet.favorite_count);
            // Glide.with(context).load(tweet.url).transform(new CenterCrop(),new RoundedCorners(25)).into(tvUrl);
 
-
-
+//
+//            try{
+//                List<String> ms = tweet.;
+//                if(!ms.isEmpty()){
+//                    List<String> P = Arrays.asList(ms.get(0).split(" - "));
+//                    if (P.get(1).equals("photo")){
+//                        tvUrl.setVisibility(View.VISIBLE);
+//                        Glide.with(context).load(P.get(0)).transform(new FitCenter(),new RoundedCorners(25)).into(tvUrl);
+//
+//                    }
+//                }
+//            }catch(Exception e){
+//
+//            }
+//
 
 
 

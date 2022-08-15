@@ -23,11 +23,6 @@ public class LoginActivity extends OAuthLoginActionBarActivity<RestClient> {
 		setContentView(R.layout.activity_login);
 
 		final SampleModel sampleModel = new SampleModel();
-		sampleModel.setName("CodePath");
-		sampleModel.setCreatedAt("2020-10-14");
-		sampleModel.setBody("Hello Wprld");
-		sampleModel.setId(12555565l);
-
 
 
 		sampleModelDao = ((RestApplication) getApplicationContext()).getMyDatabase().sampleModelDao();

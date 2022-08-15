@@ -25,6 +25,7 @@ public class Tweet_details extends AppCompatActivity {
     TextView tvScreenName;
     TextView tvName;
     ImageView ivProfileImage;
+    ImageView tvUrl;
 
 
     @Override
@@ -37,6 +38,7 @@ public class Tweet_details extends AppCompatActivity {
         tvScreenName = findViewById(R.id.tvScreenName);
         tvName = findViewById(R.id.tvName);
         ivProfileImage = findViewById(R.id.ivProfileImage);
+        tvUrl = findViewById(R.id.tvUrl);
 
         Tweet tweet = Parcels.unwrap(getIntent().getParcelableExtra("tweet"));
 
@@ -44,6 +46,7 @@ public class Tweet_details extends AppCompatActivity {
         tvScreenName.setText(tweet.user.screenName);
         tvName.setText("@"+tweet.user.name);
         Glide.with(this).load(tweet.user.profileImageUrl) .transform(new CenterCrop(),new RoundedCorners(100)).into(ivProfileImage);
+        Glide.with(this).load(tweet.user.ivUrl1) .transform(new CenterCrop(),new RoundedCorners(25)).into(tvUrl);
 
 
 
