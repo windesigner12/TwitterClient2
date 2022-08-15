@@ -68,7 +68,7 @@ public class Tweet {
                 P += entities_media.getJSONObject(i).getString("media_url_https");
                 P += " - ";
                 P += entities_media.getJSONObject(0).getString("type");
-               // tweet.medias.add(P);
+              // tweet.medias.add(P);
 
             }
         }catch(Exception e ){
