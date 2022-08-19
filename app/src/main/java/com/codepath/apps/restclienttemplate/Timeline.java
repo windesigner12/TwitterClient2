@@ -109,9 +109,8 @@ public class Timeline extends AppCompatActivity {
                 Log.i("TimelineActivity", "Showing data from databse");
                 List<TweetWithUser> tweetWithUsers = tweetDao.recentItems();
                 List<Tweet> tweetsFromDB = TweetWithUser.getTweetList(tweetWithUsers);
-
-            adapter.clear();
-            adapter.addAll(tweetsFromDB);
+                adapter.clear();
+                adapter.addAll(tweetsFromDB);
             }
         });
 
@@ -188,17 +187,19 @@ public class Timeline extends AppCompatActivity {
 
                   List<Tweet> tweetsFromNetwork =  Tweet.fromJsonArray(jsonArray);
                     adapter.clear();
-                    adapter.addAll(Tweet.fromJsonArray(jsonArray));
+                    adapter.addAll(tweetsFromNetwork);
                     swipeContainer.setRefreshing(false);
 
 
         AsyncTask.execute(new Runnable() {
             @Override
             public void run() {
-//                List<User> usersFromNetwork = User.fromJsonTweetArray(tweetsFromNetwork);
-//
-//         tweetDao.insertModel(usersFromNetwork.toArray(new User[0]));
-//               tweetDao.insertModel(tweetsFromNetwork.toArray(new Tweet[0]));
+                List<User> usersFromNetwork = User.fromJsonTweetArray(tweetsFromNetwork);
+
+               tweetDao.insertModel(usersFromNetwork.toArray(new User[0]));
+               tweetDao.insertModel(tweetsFromNetwork.toArray(new Tweet[0]));
+
+
             }
         });
 

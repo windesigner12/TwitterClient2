@@ -133,10 +133,6 @@ public class TweetAdapter extends RecyclerView.Adapter<TweetAdapter.ViewHolder>{
 //            }
 //
 
-
-
-
-
             container.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {

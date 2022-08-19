@@ -53,6 +53,6 @@ public class User {
     for (int i = 0; i < tweetsFromNetwork.size(); i++){
         users.add(tweetsFromNetwork.get(i).user);
     }
-    return null;
+    return users;
     }
 }
